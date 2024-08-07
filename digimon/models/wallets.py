@@ -9,7 +9,7 @@ from . import transactions
 
 class BaseWallet(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    owner: str
+    owner: int
     balance: float
 
 

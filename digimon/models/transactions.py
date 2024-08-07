@@ -9,8 +9,8 @@ from . import wallets
 
 class BaseTransaction(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    sender: str
-    receiver: str
+    sender: int
+    receiver: int
     amount: float
 
 
