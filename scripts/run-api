@@ -1,1 +1,1 @@
-poetry run uvicorn "digimon.main:app" --reload
+poetry run uvicorn "digimon.main:create_app" --reload
