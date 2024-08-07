@@ -5,7 +5,7 @@ from sqlmodel import Field, SQLModel, create_engine, Session, select
 from ..models import Merchant, CreatedMerchant, MerchantList, DBMerchant, UpdatedMerchant, engine
 
 
-router = APIRouter(prefix="/merchants")
+router = APIRouter(prefix="/merchants", tags=["merchants"])
 
 
 @router.get("")

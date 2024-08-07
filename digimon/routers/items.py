@@ -5,7 +5,7 @@ from sqlmodel import Field, SQLModel, create_engine, Session, select
 from ..models import Item, CreatedItem, ItemList, DBItem, UpdatedItem, engine
 
 
-router = APIRouter(prefix="/items")
+router = APIRouter(prefix="/items", tags=["items"])
 
 
 @router.get("")

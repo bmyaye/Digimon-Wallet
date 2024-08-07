@@ -5,7 +5,7 @@ from sqlmodel import Field, SQLModel, create_engine, Session, select
 from ..models import Wallet, CreatedWallet, WalletList, DBWallet, UpdatedWallet, engine
 
 
-router = APIRouter(prefix="/wallets")
+router = APIRouter(prefix="/wallets", tags=["wallets"])
 
 
 @router.get("")

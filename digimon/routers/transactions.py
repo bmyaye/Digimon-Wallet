@@ -5,7 +5,7 @@ from sqlmodel import Field, SQLModel, create_engine, Session, select
 from ..models import Transaction, CreatedTransaction, TransactionList, DBTransaction, UpdatedTransaction, engine
 
 
-router = APIRouter(prefix="/transactions")
+router = APIRouter(prefix="/transactions", tags=["transactions"])
 
 
 @router.get("")
