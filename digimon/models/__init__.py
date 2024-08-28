@@ -8,11 +8,13 @@ from . import items
 from . import merchants
 from . import wallets
 from . import transactions
+from . import users
 
 from .items import *
 from .merchants import *
 from .wallets import *
 from .transactions import *
+from .users import *
 
 connect_args = {}
 
