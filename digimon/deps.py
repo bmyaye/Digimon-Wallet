@@ -31,11 +31,11 @@ async def get_current_user(
         if user_id is None:
             raise credentials_exception
 
-    except jwt.PyJWTError as e:
+    except jwt.JWTError as e:
         print(e)
         raise credentials_exception
     
-    user = await session.get(models.User, user_id)
+    user = await session.get(models.DBUser, user_id)
 
     if user is None:
         raise credentials_exception

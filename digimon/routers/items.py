@@ -57,6 +57,7 @@ async def create_item(
 async def read_item(
     item_id: int, 
     session: Annotated[AsyncSession, Depends(models.get_session)],
+    current_user: Annotated[models.User, Depends(deps.get_current_user)],
 ) -> models.Item:
     db_item = await session.get(models.DBItem, item_id)
     if db_item:
