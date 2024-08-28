@@ -10,9 +10,10 @@ from .. import models
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-
 @router.get("/me")
-def get_me(current_user: models.User = Depends(deps.get_current_user)) -> models.User:
+async def get_me(
+    current_user: models.User = Depends(deps.get_current_user),
+) -> models.User:
     return current_user
 
 
@@ -93,23 +94,23 @@ async def update(
     current_user: models.User = Depends(deps.get_current_user),
 ) -> models.User:
 
-    user = await session.get(models.DBUser, user_id)
+    db_user = await session.get(models.DBUser, user_id)
 
-    if not user:
+    if not db_user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Not found this user",
         )
     
-    if not user.verify_password(user_update.password):
+    if not db_user.verify_password(user_update.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect password",
         )
 
-    user.update(**user_update.dict(exclude_unset=True))
-    session.add(user)
+    db_user.sqlmodel_update(user_update)
+    session.add(db_user)
     await session.commit()
-    await session.refresh(user)
+    await session.refresh(db_user)
 
-    return user
+    return db_user

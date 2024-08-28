@@ -3,19 +3,14 @@ import datetime
 from sqlmodel import select
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status, Security
-from fastapi.security import (
-    HTTPAuthorizationCredentials,
-    HTTPBasicCredentials,
-    HTTPBearer,
-    OAuth2PasswordRequestForm,
-)
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBasicCredentials, HTTPBearer, OAuth2PasswordRequestForm
 
 from .. import models
 from .. import config
 from .. import security
 
 
-router = APIRouter(tags=["authentications"])
+router = APIRouter(prefix="/authentications", tags=["authentications"])
 
 
 settings = config.get_settings()
