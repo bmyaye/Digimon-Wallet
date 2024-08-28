@@ -45,7 +45,8 @@ async def create_item(
 ) -> models.Item | None:
     # print("create_item", item)
     data = item.dict()
-    dbitem = models.DBItem(**data)
+    dbitem = models.DBItem.parse_obj(data)
+    dbitem.user = current_user
     session.add(dbitem)
     await session.commit()
     await session.refresh(dbitem)
@@ -57,7 +58,6 @@ async def create_item(
 async def read_item(
     item_id: int, 
     session: Annotated[AsyncSession, Depends(models.get_session)],
-    current_user: Annotated[models.User, Depends(deps.get_current_user)],
 ) -> models.Item:
     db_item = await session.get(models.DBItem, item_id)
     if db_item:
